@@ -7,13 +7,13 @@ const port = 3000;
 app.use(express.json());
 
 app.get('/numbers', async (req, res) => {
-  const urlParams = req.query.url;
+  const urlCriteria = req.query.url;
 
-  if (!urlParams || !Array.isArray(urlParams)) {
+  if (!urlCriteria || !Array.isArray(urlCriteria)) {
     return res.status(400).json({ error: 'Invalid URL parameters' });
   }
 
-  const requests = urlParams.map(async (url) => {
+  const requests = urlCriteria.map(async (url) => {
     try {
       const response = await axios.get(url);
       return response.data.numbers;
